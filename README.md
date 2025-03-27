@@ -31,14 +31,21 @@ As shown in Scabini's original work ([GitHub](https://github.com/scabini/PArewir
 
 ### Neuron Strength Definition
 For a weight matrix \( W \in \mathbb{R}^{n \times m} \):
-\[ \text{Strength}(s_i) = \sum_{j=1}^m |w_{ij}| \]
+
+$$
+\text{Strength}(s_i) = \sum_{j=1}^{m} |w_{ij}|
+$$
 
 ### Rewiring Algorithm
 1. **Initialize** weights with Kaiming normal distribution
 2. **Accumulate strengths** for each neuron:
-   \[ s^{(t)} = s^{(t-1)} + W_{:,t-1} \]
+   $$
+   s^{(t)} = s^{(t-1)} + W_{:,t-1}
+   $$
 3. **Compute probabilities**:
-   \[ P = \frac{s + |\min(s)| + \epsilon}{\sum(s + |\min(s)| + \epsilon)} \]
+   $$
+   P = \frac{s + |\min(s)| + \epsilon}{\sum(s + |\min(s)| + \epsilon)}
+   $$
 4. **Rewire connections** using preferential attachment:
    - Select targets via weighted random sampling
    - Reassign weights sorted by magnitude
